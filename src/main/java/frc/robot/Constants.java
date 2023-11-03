@@ -20,6 +20,6 @@ public final class Constants {
     public static final int kDriveRightMotor1 = 3;
     public static final int kDriveRightmotor2 = 4;
     public static final int kArmMotor = 5;
-    //private static final int kElevatorMotor = 6;
+    
   }
 }

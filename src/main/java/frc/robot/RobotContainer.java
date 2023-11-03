@@ -10,8 +10,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
-//import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Arm2.Arm;
+import frc.robot.subsystems.Arm;
 //import frc.robot.commands.ArmCommand;
 import edu.wpi.first.math.util.Units;
 //import edu.wpi.first.wpilibj.Joystick;
@@ -71,7 +70,7 @@ public class RobotContainer {
 
     m_driverController.a().whileTrue(new InstantCommand(() -> m_intake.getIntakePosition(Units.degreesToRadians(90))));
 
-    m_driverController.b().onTrue(new InstantCommand(() -> m_arm.setArmPos(0, 0)));
+    //m_driverController.b().onTrue(new InstantCommand(() -> m_arm.setArmPos(0, 0)));
 
     
 

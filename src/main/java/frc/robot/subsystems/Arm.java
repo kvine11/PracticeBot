@@ -8,11 +8,12 @@ import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
+// import edu.wpi.first.math.controller.ProfiledPIDController;
+// import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+// import edu.wpi.first.math.trajectory.TrapezoidProfile;
+// import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 //import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,8 +23,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
     private CANSparkMax armMotor;
     private AbsoluteEncoder armEncoder;
-    private PIDController armController;
-    private SimpleMotorFeedforward ff;
+    private PIDController armController;  
+    private ArmFeedforward ff;
     private final Encoder encoder = new Encoder(4, 5);
     private final double encoderConversion = 1 / 4096 * 0.1 * Math.PI;
 
@@ -32,7 +33,7 @@ public class Arm extends SubsystemBase {
   {
     PIDController armController = new PIDController(0, 0, 0);
     armEncoder.setPositionConversionFactor(2 * Math.PI * 1.0);
-    ff = new SimpleMotorFeedforward(0, 0);
+    ff = new ArmFeedforward(0, 0, encoderConversion);
   
 
   }
@@ -72,7 +73,7 @@ public class Arm extends SubsystemBase {
 
   public void setCalculatedVoltage()
   {
-    double voltage = armController.calculate(armEncoder.getPosition(), armController.getSetpoint())
+    double voltage = armController.calculate(armEncoder.getPosition(), armController.getSetpoint());
     armMotor.setVoltage(voltage);
   }
 
