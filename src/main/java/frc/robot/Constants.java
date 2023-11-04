@@ -22,4 +22,15 @@ public final class Constants {
     public static final int kArmMotor = 5;
     
   }
+
+  public static final class ShooterConstants {
+    public static double kSparkMaxP = 0.001;
+    public static double kSparkMaxFeedforward = 0.000195; // .00022
+
+    public static int kLeftMotorPort = 11;
+    public static int kRightMotorPort = 12;
+
+    public static double kVelocityTolerance = 115;
+}
+
 }

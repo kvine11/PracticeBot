@@ -7,10 +7,11 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 //import frc.robot.commands.Autos;
 //import frc.robot.commands.ArmCommand;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Arm;
+//import frc.robot.subsystems.Intake;
+//import frc.robot.subsystems.Drive;
+//import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Flywheel;
+//import frc.robot.subsystems.Arm;
 //import frc.robot.commands.ArmCommand;
 import edu.wpi.first.math.util.Units;
 //import edu.wpi.first.wpilibj.Joystick;
@@ -28,10 +29,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Elevator m_elevator = new Elevator();
-  private final Drive m_drive = new Drive();
-  private final Arm m_arm = new Arm();
-  private final Intake m_intake = new Intake();
+  //private final Elevator m_elevator = new Elevator();
+  //private final Drive m_drive = new Drive();
+  //private final Arm m_arm = new Arm();
+  //private final Intake m_intake = new Intake();
+  private final Flywheel m_Flywheel = new Flywheel();
   //private final Arm2 m_arm2 = new Arm2();
   //private final Joystick joystick1 = new Joystick(0);
 
@@ -43,7 +45,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    new Trigger(() -> m_driverController.getLeftY() > 0.5).onTrue(new InstantCommand(() -> m_drive.moveForward()));
+    //new Trigger(() -> m_driverController.getLeftY() > 0.5).onTrue(new InstantCommand(() -> m_drive.moveForward()));
   }
 
   /**
@@ -66,9 +68,10 @@ public class RobotContainer {
     //m_driverController.getLeftTriggerAxis().whileTrue(drive.moveForward());
     //m_driverController.y().whileTrue(new InstantCommand(() -> m_arm.setArmPosition(Units.degreesToRadians(90))));
     //m_driverController.a().whileTrue(new InstantCommand (() -> m_arm.setArmPosition(Units.degreesToRadians(90))));
-    m_driverController.b().whileTrue(new InstantCommand(() -> m_elevator.setElevatorPosition(Units.degreesToRadians(90))));
+    // m_driverController.b().whileTrue(new InstantCommand(() -> m_elevator.setElevatorPosition(Units.degreesToRadians(90))));
 
-    m_driverController.a().whileTrue(new InstantCommand(() -> m_intake.getIntakePosition(Units.degreesToRadians(90))));
+    //m_driverController.a().whileTrue(new InstantCommand(() -> m_intake.getIntakePosition(Units.degreesToRadians(90))));
+    m_driverController.y().onTrue(new InstantCommand(() -> m_Flywheel.setGoal(1000))).onFalse(new InstantCommand(() -> m_Flywheel.setGoal(0)));
 
     //m_driverController.b().onTrue(new InstantCommand(() -> m_arm.setArmPos(0, 0)));
 
